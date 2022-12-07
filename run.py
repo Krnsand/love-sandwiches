@@ -5,7 +5,7 @@ SCOPE = [
     "https://www.googleapis.com/auth/spreadsheets",
     "https://www.googleapis.com/auth/drive.file",
     "https://www.googleapis.com/auth/drive"
-    ]
+]
 
 CREDS = Credentials.from_service_account_file('creds.json')
 SCOPED_CREDS = CREDS.with_scopes(SCOPE)
@@ -26,7 +26,6 @@ def get_sales_data():
         print("Example: 10,20,30,40,50,60\n")
 
         data_str = input("Enter your data here:\n")
-            
         sales_data = data_str.split(",")
         validate_data(sales_data)
 
@@ -77,12 +76,12 @@ def calculate_surplus_data(sales_row):
     print("Calculating our surplus data...\n")
     stock = SHEET.worksheet("stock").get_all_values()
     stock_row = stock[-1]
-    
+
     surplus_data = []
     for stock, sales in zip(stock_row, sales_row):
         surplus = int(stock) - sales
         surplus_data.append(surplus)
-    
+
     return surplus_data
 
 
@@ -98,7 +97,7 @@ def get_last_5_entries_sales():
     for ind in range(1, 7):
         column = sales.col_values(ind)
         columns.append(column[-5:])
-    
+
     return columns
 
 
@@ -114,7 +113,7 @@ def calculate_stock_data(data):
         average = sum(int_column) / len(int_column)
         stock_num = average * 1.1
         new_stock_data.append(round(stock_num))
-    
+
     return new_stock_data
 
 
